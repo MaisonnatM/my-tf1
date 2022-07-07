@@ -1,6 +1,20 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  webpack: (config) => {
+    config.module.rules.push({
+      test: /\.(graphql|gql)$/,
+      exclude: /node_modules/,
+      loader: 'graphql-tag/loader',
+    });
+    return config;
+  },
+  webpackDevMiddleware: (config) => {
+    return config;
+  },
+  images: {
+    domains: ['photos.tf1.fr'],
+  }
 }
 
 module.exports = nextConfig
